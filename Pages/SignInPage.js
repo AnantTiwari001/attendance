@@ -4,10 +4,6 @@ import DefaultButton from "../Components/DefaultButton";
 import Inputform from "../Components/Inputform";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from "../firebase/auth";
-// import DefaultButton from "../Components/DefaultButton";
-// import Inputform from "../Components/Inputform";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import auth from "../firebase/auth";
 
 const SignInPage = ({navigation}) => {
   const [email, setEmail] = useState("");
