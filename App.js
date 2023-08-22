@@ -6,12 +6,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import SignInPage from './Pages/SignInPage';
 import SignUpPage from './Pages/SignUpPage';
 import SelfiePage from './Pages/SelfiePage';
+import SamplePage from './Pages/SamplePage';
 
 export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      <MainPage/>
+      {/* <MainPage/> */}
+      <SamplePage />
     </NavigationContainer>
   );
 };
