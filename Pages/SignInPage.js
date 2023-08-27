@@ -4,17 +4,21 @@ import DefaultButton from "../Components/DefaultButton";
 import Inputform from "../Components/Inputform";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from "../firebase/auth";
+import { useDispatch } from "react-redux";
+import mainSlice from "../Redux/slice";
 
 const SignInPage = ({navigation}) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        dispatch(mainSlice.actions.addUser(user.email))
         ToastAndroid.show("Login Success!", ToastAndroid.SHORT);
         navigation.navigate('home')
         // ...

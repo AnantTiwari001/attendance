@@ -9,26 +9,12 @@ import SelfiePage from './Pages/SelfiePage';
 import SamplePage from './Pages/SamplePage';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import mainSlice from './Redux/slice';
 
-const initialState = {
-  counter: 0
-}
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.counter += 1;
-    },
-    decrement: (state) => {
-      state.counter -= 1;
-    }
-  }
-})
 
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: mainSlice.reducer,
 })
 
 
@@ -65,5 +51,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export {counterSlice};

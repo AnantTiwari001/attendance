@@ -1,21 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import DefaultButton from '../Components/DefaultButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { counterSlice } from '../App';
+import mainSlice from '../Redux/slice';
 
 const HomePage = ({ navigation }) => {
-    const counter = useSelector((state) => state.counter);
+    const username = useSelector((state) => state.username);
     const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>
-            <View style={{ alignItems: 'center', marginTop: 50 }} >
-                <Text style={{ fontSize: 23, }} >Count: {counter} </Text>
+            {/* <View style={{ alignItems: 'center', marginTop: 50 }} >
+                <Text style={{ fontSize: 23, }} >User: {username} </Text>
                 <View style={{flexDirection:'row', width:280, justifyContent:'space-between', marginTop:10}} >
-                    <Button title='increment' onPress={()=>dispatch(counterSlice.actions.increment())} />
-                    <Button title='decrement' onPress={()=>dispatch(counterSlice.actions.decrement())} />
+                    <Button title='add User' onPress={()=>dispatch(mainSlice.actions.addUser('sentProp'))} />
+                    <Button title='add data' onPress={()=>)} />
                 </View>
-            </View>
+            </View> */}
             <View style={styles.btnGroup} >
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('SignIn')} >
                     <DefaultButton text={'Login'} dark={false} />

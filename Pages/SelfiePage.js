@@ -16,9 +16,17 @@ import { doc, setDoc } from 'firebase/firestore';
 import db from '../firebase/database';
 import storage from "../firebase/storage";
 import auth from "../firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import mainSlice from "../Redux/slice";
 
 
 export default function SelfiePage() {
+
+  const username= useSelector((state)=>state.username);
+  const location= useSelector((state)=>state.latestData);
+
+  const dispatch= useDispatch();
+
   useEffect(() => {
     getPermissions();
   }, [])
@@ -53,6 +61,7 @@ export default function SelfiePage() {
       type:'image/jpeg'
     })
     const location= await getCurrentPositionAsync()
+    dispatch(mainSlice.actions.addData(`${location.coords.latitude} ${location.coords.longitude}`))
     await uploadBytes(imageRef, imageBlob);
     const photoUrl = await getDownloadURL(imageRef);
     let finalObj = { imageUrl: photoUrl, dateTime: date, coord: { lat: location.coords.latitude, long: location.coords.longitude } }
@@ -63,6 +72,7 @@ export default function SelfiePage() {
     <View style={styles.container}>
       <View style={styles.info} >
         <Text style={{ color: 'white', fontSize: 17 }} >Click Photo to continue</Text>
+        <Text style={{color:'white', fontSize:13}} >Logged in as: {username}</Text>
       </View>
       <Camera style={styles.cameraStyle} ref={cameraItem} type={type}  ></Camera>
       <View style={styles.bottomBtns} >
@@ -72,8 +82,8 @@ export default function SelfiePage() {
         <TouchableOpacity style={styles.clickBtn} onPress={clickPhoto} >
 
         </TouchableOpacity>
-        <TouchableOpacity style={[, { opacity: 1 }]} >
-          <Image style={{ width: 100, height: 100 }} source={{ uri: 'https://st.depositphotos.com/2274151/3518/i/450/depositphotos_35186549-stock-photo-sample-grunge-red-round-stamp.jpg' }} />
+        <TouchableOpacity style={[{ opacity: 1, width:110, height:90, justifyContent:'center', alignItems:'center'}]} >
+          <Text style={{color:'white'}} >Recent Location: {location}</Text>
         </TouchableOpacity>
       </View>
     </View>
